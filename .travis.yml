@@ -1,0 +1,9 @@
+rvm:
+  - 2.0.0
+
+script: "bundle exec rspec"
+
+notifications:
+  disabled: false
+  recipients:
+    - developers@betterplace.org
