@@ -2,6 +2,10 @@
 
 Translate active record object attributes without the use of additional models.
 
+## Build status
+
+[![Build Status](https://travis-ci.org/betterplace/serial_translator.png)](https://travis-ci.org/betterplace/serial_translator)
+
 ## Installation
 
 Add this line to your application's Gemfile:
