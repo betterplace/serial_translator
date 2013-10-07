@@ -55,4 +55,8 @@ module SerialTranslator
   def translations_for(attribute)
     __send__(:"#{attribute}_translations") || {}
   end
+
+  def translated_into?(locale)
+    translated_locales.include?(locale.to_sym)
+  end
 end

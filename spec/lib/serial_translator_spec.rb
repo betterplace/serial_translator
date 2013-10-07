@@ -72,4 +72,20 @@ describe SerialTranslator do
       object.translated_locales.should eq [:en]
     end
   end
+
+  describe '#translated_into?' do
+    before { object.title_translations = { en: 'Foo', de: '' } }
+
+    it 'returns true if there is a translation available for this locale' do
+      object.should be_translated_into :en
+    end
+
+    it 'returns false if there is no translation present for this locale' do
+      object.should_not be_translated_into :de
+    end
+
+    it 'returns false if this locale is unknown yet' do
+      object.should_not be_translated_into :yml
+    end
+  end
 end
