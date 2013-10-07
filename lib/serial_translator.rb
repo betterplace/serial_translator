@@ -28,7 +28,11 @@ module SerialTranslator
 
         define_method "#{attribute}=" do |value|
           translations = translations_for(attribute)
-          translations[current_translation_locale] = value
+          if value.present?
+            translations[current_translation_locale] = value
+          else
+            translations.delete(current_translation_locale)
+          end
           __send__(:"#{attribute}_translations=", translations)
         end
       end
