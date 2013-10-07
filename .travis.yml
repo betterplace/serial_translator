@@ -1,7 +1,7 @@
 rvm:
   - 2.0.0
 
-script: "bundle exec rspec"
+script: "bundle exec rake"
 
 notifications:
   disabled: false

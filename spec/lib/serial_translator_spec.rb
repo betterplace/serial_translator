@@ -42,6 +42,20 @@ describe SerialTranslator do
       object.title = 'Deutsch'
       object.title_translations.should eq({ de: 'Deutsch' })
     end
+
+    it 'nil removes the value for the current text locale' do
+      object.title_translations = { de: 'Deutsch' }
+      object.current_translation_locale = :de
+      object.title = nil
+      object.title_translations.should eq({})
+    end
+
+    it 'blank string removes the value for the current text locale' do
+      object.title_translations = { de: 'Deutsch' }
+      object.current_translation_locale = :de
+      object.title = "    "
+      object.title_translations.should eq({})
+    end
   end
 
   describe '#current_translation_locale' do
