@@ -19,6 +19,8 @@ module SerialTranslator
       attributes.each do |attribute|
         serialize :"#{attribute}_translations", Hash
 
+        # Define the normal getter, that respects the
+        # current translation locale
         define_method attribute do |locale = current_translation_locale|
           translations = translations_for(attribute)
           result = translations[locale] if translations[locale].present?
@@ -26,6 +28,8 @@ module SerialTranslator
           result
         end
 
+        # Define the normal setter, that respects the
+        # current translation locale
         define_method "#{attribute}=" do |value|
           translations = translations_for(attribute)
           if value.present?
@@ -34,6 +38,32 @@ module SerialTranslator
             translations.delete(current_translation_locale)
           end
           __send__(:"#{attribute}_translations=", translations)
+        end
+
+        # Define getters for each specific available locale
+        I18n.available_locales.each do |available_locale|
+          define_method "#{attribute}_#{available_locale.to_s.underscore}" do
+            begin
+              old_locale = I18n.locale
+              I18n.locale = available_locale
+              __send__(attribute)
+            ensure
+              I18n.locale = old_locale
+            end
+          end
+        end
+
+        # Define setters for each specific available locale
+        I18n.available_locales.each do |available_locale|
+          define_method "#{attribute}_#{available_locale.to_s.underscore}=" do |value|
+            begin
+              old_locale = I18n.locale
+              I18n.locale = available_locale
+              __send__(:"#{attribute}=", value)
+            ensure
+              I18n.locale = old_locale
+            end
+          end
         end
       end
     end

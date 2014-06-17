@@ -58,6 +58,30 @@ describe SerialTranslator do
     end
   end
 
+  describe 'getting an attribute for a specific locale' do
+    it 'gets the correct translation' do
+      object.title_translations = { de: 'Deutsch' }
+      object.title_de.should eq 'Deutsch'
+    end
+
+    it 'uses fallback mechanisms as well' do
+      object.title_translations = { en: 'English' }
+      object.title_de.should eq 'English'
+    end
+  end
+
+  describe 'writing an attribute with for a specific locale' do
+    it 'sets the value for the correct locale' do
+      object.title_de = 'Deutsch'
+      object.title_translations.should eq({ de: 'Deutsch' })
+    end
+
+    it 'works for complex locales as well' do
+      object.title_en_gb = 'Arrr'
+      object.title_translations.should eq({ :'en-GB' => 'Arrr' })
+    end
+  end
+
   describe '#current_translation_locale' do
     it 'returns the value that was given' do
       object.current_translation_locale = 'de'
