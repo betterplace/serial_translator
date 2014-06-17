@@ -6,57 +6,71 @@ describe SerialTranslator::SerialTranslatorValidator do
   describe 'presence validation' do
     it 'validates presence correctly if attribute is nil' do
       example.valid?
-      example.should have(1).error_on(:description)
+      example.errors[:description].size.should eq 1
     end
 
     it 'validates presence correctly if attribute is empty' do
       example.description = ''
-      example.should have(1).error_on(:description)
+      example.valid?
+      example.errors[:description].size.should eq 1
     end
 
     it 'has no error if everything is fine' do
       example.description = 'This is a nice foo thing'
-      example.should have(0).errors_on(:description)
+      example.valid?
+      example.errors[:description].size.should eq 0
     end
 
     it 'is valid if any language has a value' do
       example.description_translations = { en: '', de: '' }
-      example.should have(1).errors_on(:description)
+      example.valid?
+      example.errors[:description].size.should eq 1
+
       example.description_translations = { en: '', de: 'foobar' }
-      example.should have(0).errors_on(:description)
+      example.valid?
+      example.errors[:description].size.should eq 0
+
       example.description_translations = { en: 'foobar', de: nil }
-      example.should have(0).errors_on(:description)
+      example.valid?
+      example.errors[:description].size.should eq 0
     end
   end
 
   describe 'length validation' do
     it 'validates min length correctly' do
       example.title = '123'
-      example.should have(1).error_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 1
     end
 
     it 'validates max length correctly' do
       example.title = 'f' * 26
-      example.should have(1).error_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 1
     end
 
     it 'ignores blank fields' do
       example.title = ''
-      example.should have(0).errors_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 0
     end
 
     it 'validates all translation values' do
       example.title_translations = { en: '123', de: '123' }
-      example.should have(2).errors_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 2
 
       example.title_translations = { en: '123456', de: '123' }
-      example.should have(1).errors_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 1
 
       example.title_translations = { en: '123', de: '123456' }
-      example.should have(1).errors_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 1
 
       example.title_translations = { en: '123456', de: '123456' }
-      example.should have(0).errors_on(:title)
+      example.valid?
+      example.errors[:title].size.should eq 0
     end
 
     it 'validates correctly on language change as well' do
