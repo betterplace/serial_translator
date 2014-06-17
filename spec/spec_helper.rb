@@ -11,7 +11,3 @@ require 'active_model'
 require 'active_resource'
 require 'support/validations_matcher'
 require 'support/fake_object'
-
-RSpec.configure do |config|
-  config.color_enabled = true
-end
