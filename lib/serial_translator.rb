@@ -31,13 +31,13 @@ module SerialTranslator
         # Define the normal setter, that respects the
         # current translation locale
         define_method "#{attribute}=" do |value|
+          __send__(:"#{attribute}_translations_will_change!")
           translations = translations_for(attribute)
           if value.present?
             translations[current_translation_locale] = value
           else
             translations.delete(current_translation_locale)
           end
-          __send__(:"#{attribute}_translations_will_change!")
           __send__(:"#{attribute}_translations=", translations)
         end
 
