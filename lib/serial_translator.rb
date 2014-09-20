@@ -37,6 +37,7 @@ module SerialTranslator
           else
             translations.delete(current_translation_locale)
           end
+          __send__(:"#{attribute}_translations_will_change!")
           __send__(:"#{attribute}_translations=", translations)
         end
 

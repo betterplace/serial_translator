@@ -56,6 +56,11 @@ describe SerialTranslator do
       object.title = "    "
       expect(object.title_translations).to eq({})
     end
+
+    it 'marks the changes on the object for active record' do
+      object.title = 'Changed'
+      expect(object.changes).to include :title_translations
+    end
   end
 
   describe 'getting an attribute for a specific locale' do
