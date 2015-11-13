@@ -10,6 +10,12 @@ describe SerialTranslator do
       expect(object.title(:de)).to eq 'German translation'
     end
 
+    it 'provides a boolean predicate to check the presence of a translated value' do
+      expect(object.title?(:de)).to eq false
+      object.title_translations = { de: 'German translation', en: 'English translation' }
+      expect(object.title?(:de)).to eq true
+    end
+
     it 'returns the origin locale value if no translation is present' do
       object.title_translations = { en: 'English translation' }
       expect(object.title(:de)).to eq 'English translation'

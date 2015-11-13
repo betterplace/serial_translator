@@ -28,6 +28,10 @@ module SerialTranslator
           result
         end
 
+        define_method :"#{attribute}?" do |locale = current_translation_locale|
+          __send__(attribute.to_sym, locale).present?
+        end
+
         # Define the normal setter, that respects the
         # current translation locale
         define_method "#{attribute}=" do |value|
