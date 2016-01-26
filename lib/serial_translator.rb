@@ -92,13 +92,7 @@ module SerialTranslator
   end
 
   def translations_for(attribute)
-    translations = __send__(:"#{attribute}_translations") || {}
-    translations.each do |locale, string|
-      string.singleton_class.class_eval do
-        define_method(:locale) { || locale }
-      end
-    end
-    translations
+    __send__(:"#{attribute}_translations") || {}
   end
 
   def translated_into?(locale)

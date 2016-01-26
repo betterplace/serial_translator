@@ -75,7 +75,7 @@ describe SerialTranslator::SerialTranslatorValidator do
 
     it 'validates correctly on language change as well' do
       I18n.locale = :de
-      example.description = "something to make it pass valid"
+      example.description = :something_to_make_it_pass_valid
       example.title = 'Valid foo'
       expect(example).to be_valid
 

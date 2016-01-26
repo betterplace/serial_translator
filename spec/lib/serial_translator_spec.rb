@@ -8,7 +8,6 @@ describe SerialTranslator do
     it 'returns the translated value in the requested locale' do
       object.title_translations = { de: 'German translation', en: 'English translation' }
       expect(object.title(:de)).to eq 'German translation'
-      expect(object.title(:de).locale).to eq :de
     end
 
     it 'provides a boolean predicate to check the presence of a translated value' do
@@ -20,13 +19,11 @@ describe SerialTranslator do
     it 'returns the origin locale value if no translation is present' do
       object.title_translations = { en: 'English translation' }
       expect(object.title(:de)).to eq 'English translation'
-      expect(object.title(:de).locale).to eq :en
     end
 
     it 'returns the origin locale value if the translation is empty' do
       object.title_translations = { de: '', en: 'English translation' }
       expect(object.title(:de)).to eq 'English translation'
-      expect(object.title(:de).locale).to eq :en
     end
 
     it 'returns nil if no translations are there at all' do
@@ -38,7 +35,6 @@ describe SerialTranslator do
       object.title_translations = { de: 'Deutsch', en: 'English' }
       object.current_translation_locale = :en
       expect(object.title).to eq 'English'
-      expect(object.title.locale).to eq :en
     end
 
     it 'does not fail even if translations were not initialized before' do
@@ -77,13 +73,11 @@ describe SerialTranslator do
     it 'gets the correct translation' do
       object.title_translations = { de: 'Deutsch' }
       expect(object.title_de).to eq 'Deutsch'
-      expect(object.title_de.locale).to eq :de
     end
 
     it 'uses fallback mechanisms as well' do
       object.title_translations = { en: 'English' }
       expect(object.title_de).to eq 'English'
-      expect(object.title_de.locale).to eq :en
     end
   end
 
