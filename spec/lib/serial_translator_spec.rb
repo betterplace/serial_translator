@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe SerialTranslator do
-
   let(:object) { FakeObject.new }
 
   describe 'getting a translated value' do
@@ -84,12 +83,12 @@ describe SerialTranslator do
   describe 'writing an attribute with for a specific locale' do
     it 'sets the value for the correct locale' do
       object.title_de = 'Deutsch'
-      expect(object.title_translations).to eq({ de: 'Deutsch' })
+      expect(object.title_translations).to eq(de: 'Deutsch')
     end
 
     it 'works for complex locales as well' do
       object.title_en_gb = 'Arrr'
-      expect(object.title_translations).to eq({ :'en-GB' => 'Arrr' })
+      expect(object.title_translations).to eq('en-GB': 'Arrr')
     end
   end
 
