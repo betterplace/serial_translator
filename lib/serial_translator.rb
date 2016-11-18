@@ -1,6 +1,8 @@
 require 'active_support'
 require 'active_model'
-Dir[File.join(__dir__, '**', '*.rb')].each { |file| require file }
+
+require 'serial_translator/serial_translator_length_validator'
+require 'serial_translator/serial_translator_presence_validator'
 
 module SerialTranslator
   extend ActiveSupport::Concern
