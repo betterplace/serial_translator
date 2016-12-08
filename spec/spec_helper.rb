@@ -8,6 +8,5 @@ SimpleCov.start 'gem'
 
 require 'serial_translator'
 require 'active_model'
-require 'active_resource'
 require 'support/fake_object'
 require 'rspec/collection_matchers'
