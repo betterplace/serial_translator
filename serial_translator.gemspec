@@ -24,5 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec-collection_matchers'
+  spec.add_development_dependency 'json', '~>2'
   spec.add_development_dependency 'simplecov'
 end
