@@ -5,7 +5,7 @@ describe SerialTranslator::TranslationType do
 
   describe '#cast' do
     it 'works for JSON' do
-      expect(type.cast('{"foo":"bar"}')).to eq('foo' => 'bar')
+      expect(type.cast('{"foo":"bar"}')).to eq(foo: 'bar')
     end
 
     it 'works for YAML' do

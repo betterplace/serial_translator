@@ -8,7 +8,7 @@ class SerialTranslator::TranslationType < ActiveRecord::Type::String
     when /\A---/
       YAML.load(value)
     else
-      JSON.parse(value)
+      JSON.parse(value).symbolize_keys
     end
   end
 
