@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SerialTranslator::SerialTranslatorLengthValidator do
-  let(:example) { FakeObject.new }
+  let(:example) { Fake.new }
 
   describe 'validation' do
     it 'validates min length correctly' do

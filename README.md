@@ -6,6 +6,10 @@
 
 Translate ActiveRecord object attributes without the use of additional models.
 
+## Changes from 1.* to 2.*
+
+`serial_translator` will now store all translations in JSON format per default rather than in YAML. However, it is still able to read YAML serialized translations and will convert them in the background.
+
 ## Installation
 
 Add it to your Gemfile:
