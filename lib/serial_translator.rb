@@ -1,8 +1,11 @@
 require 'active_support'
 require 'active_model'
+require 'active_record'
 
 require 'serial_translator/serial_translator_length_validator'
 require 'serial_translator/serial_translator_presence_validator'
+require 'serial_translator/translation_type'
+require 'serial_translator/version'
 
 module SerialTranslator
   extend ActiveSupport::Concern
@@ -17,42 +20,42 @@ module SerialTranslator
     def serial_translator_for(*attributes)
       @serial_translator_attributes = attributes
 
-      attributes.each do |attribute|
-        serialize :"#{attribute}_translations", Hash
+      attributes.each do |attr_name|
+        attribute :"#{attr_name}_translations", SerialTranslator::TranslationType.new
 
         # Define the normal getter, that respects the
         # current translation locale
-        define_method attribute do |locale = current_translation_locale|
-          translations = translations_for(attribute)
+        define_method attr_name do |locale = current_translation_locale|
+          translations = translations_for(attr_name)
           result = translations[locale] if translations[locale].present?
           result ||= translations.values.detect(&:present?) if translation_fallback?
           result
         end
 
-        define_method :"#{attribute}?" do |locale = current_translation_locale|
-          __send__(attribute.to_sym, locale).present?
+        define_method :"#{attr_name}?" do |locale = current_translation_locale|
+          __send__(attr_name.to_sym, locale).present?
         end
 
         # Define the normal setter, that respects the
         # current translation locale
-        define_method "#{attribute}=" do |value|
-          __send__(:"#{attribute}_translations_will_change!")
-          translations = translations_for(attribute)
+        define_method "#{attr_name}=" do |value|
+          __send__(:"#{attr_name}_translations_will_change!")
+          translations = translations_for(attr_name)
           if value.present?
             translations[current_translation_locale] = value
           else
             translations.delete(current_translation_locale)
           end
-          __send__(:"#{attribute}_translations=", translations)
+          __send__(:"#{attr_name}_translations=", translations)
         end
 
         # Define getters for each specific available locale
         I18n.available_locales.each do |available_locale|
-          define_method "#{attribute}_#{available_locale.to_s.underscore}" do
+          define_method "#{attr_name}_#{available_locale.to_s.underscore}" do
             begin
               old_locale = I18n.locale
               I18n.locale = available_locale
-              __send__(attribute)
+              __send__(attr_name)
             ensure
               I18n.locale = old_locale
             end
@@ -61,11 +64,11 @@ module SerialTranslator
 
         # Define setters for each specific available locale
         I18n.available_locales.each do |available_locale|
-          define_method "#{attribute}_#{available_locale.to_s.underscore}=" do |value|
+          define_method "#{attr_name}_#{available_locale.to_s.underscore}=" do |value|
             begin
               old_locale = I18n.locale
               I18n.locale = available_locale
-              __send__(:"#{attribute}=", value)
+              __send__(:"#{attr_name}=", value)
             ensure
               I18n.locale = old_locale
             end

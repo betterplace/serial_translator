@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SerialTranslator::SerialTranslatorPresenceValidator do
-  let(:example) { FakeObject.new }
+  let(:example) { Fake.new }
 
   describe 'validation' do
     it 'validates presence correctly if attribute is nil' do

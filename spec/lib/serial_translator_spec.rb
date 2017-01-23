@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SerialTranslator do
-  let(:object) { FakeObject.new }
+  let(:object) { Fake.new }
 
   describe 'getting a translated value' do
     it 'returns the translated value in the requested locale' do
@@ -134,6 +134,20 @@ describe SerialTranslator do
 
     it 'returns false if this locale is unknown yet' do
       expect(object).to_not be_translated_into :yml
+    end
+  end
+
+  context 'use active record methods' do
+    it 'works with where and LIKE' do
+      expect {
+        Fake.where('title_translations LIKE ?', '%foobar').count
+      }.not_to raise_error
+    end
+
+    it 'works with where and Hash syntax' do
+      expect {
+        Fake.where(title_translations: 'foobar').count
+      }.not_to raise_error
     end
   end
 end
