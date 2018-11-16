@@ -48,6 +48,12 @@ describe SerialTranslator do
       expect(object.title_translations).to eq({ de: 'Deutsch' })
     end
 
+    it 'raises an error if current translation is not an I18n locale' do
+      object.current_translation_locale = :foobar
+      expect { object.title = 'Deutsch' }.to raise_error(SerialTranslator::InvalidLocaleError)
+      expect(object.title_translations).to eq({})
+    end
+
     it 'nil removes the value for the current text locale' do
       object.title_translations = { de: 'Deutsch' }
       object.current_translation_locale = :de

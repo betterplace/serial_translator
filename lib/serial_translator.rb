@@ -14,6 +14,9 @@ module SerialTranslator
     attr_writer :current_translation_locale, :translation_fallback
   end
 
+  class InvalidLocaleError < StandardError
+  end
+
   module ClassMethods
     attr_reader :serial_translator_attributes
 
@@ -39,6 +42,9 @@ module SerialTranslator
         # Define the normal setter, that respects the
         # current translation locale
         define_method "#{attr_name}=" do |value|
+          unless I18n.available_locales.include?(current_translation_locale)
+            raise InvalidLocaleError, "current_translation_locale #{current_translation_locale.inspect} is not a member of I18n.available_locales: #{I18n.available_locales.inspect}"
+          end
           __send__(:"#{attr_name}_translations_will_change!")
           translations = translations_for(attr_name)
           if value.present?
