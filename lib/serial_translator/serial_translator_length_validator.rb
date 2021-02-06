@@ -29,7 +29,7 @@ module SerialTranslator
 
         default_message = options[MESSAGES[key]]
         error_options[:message] ||= default_message if default_message
-        record.errors.add(attribute, MESSAGES[key], error_options)
+        record.errors.add(attribute, MESSAGES[key], **error_options)
       end
     end
 

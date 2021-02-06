@@ -4,7 +4,7 @@ module SerialTranslator
       translations = record.__send__("#{attribute}_translations") || {}
       return if translations.values.any?(&:present?)
       if record.send(attribute).blank?
-        record.errors.add(attribute, :blank, options)
+        record.errors.add(attribute, :blank, **options)
       end
     end
 
