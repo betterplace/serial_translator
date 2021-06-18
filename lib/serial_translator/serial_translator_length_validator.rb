@@ -17,7 +17,7 @@ module SerialTranslator
       error_options = options.except(*RESERVED_OPTIONS)
 
       CHECKS.each do |key, validity_check|
-        next unless check_value = options[key]
+        next unless (check_value = options[key])
 
         if !value.nil? || skip_nil_check?(key)
           next if value_length.send(validity_check, check_value)

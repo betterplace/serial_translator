@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/serial_translator.svg)](http://badge.fury.io/rb/serial_translator)
 [![Build Status](https://github.com/betterplace/serial_translator/workflows/tests/badge.svg)](https://github.com/betterplace/serial_translator/actions)
-[![Dependency Status](https://gemnasium.com/betterplace/serial_translator.svg)](https://gemnasium.com/betterplace/serial_translator)
 
 Translate ActiveRecord object attributes without the use of additional models.
 
