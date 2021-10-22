@@ -47,6 +47,9 @@ module SerialTranslator
           end
           __send__(:"#{attr_name}_translations_will_change!")
           translations = translations_for(attr_name)
+
+          value&.scrub!('')
+
           if value.present?
             translations[current_translation_locale] = value
           else
