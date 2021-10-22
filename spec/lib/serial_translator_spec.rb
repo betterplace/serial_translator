@@ -42,6 +42,12 @@ describe SerialTranslator do
   end
 
   describe 'writing an attribute' do
+    it 'sets the value for the current text locale even with weird utf8 contents' do
+      object.current_translation_locale = :de
+      object.title = "Ügnore ünvalîd \xFF UTF-8"
+      expect(object.title_translations).to eq({ de: 'Ügnore ünvalîd  UTF-8' })
+    end
+
     it 'sets the value for the current text locale' do
       object.current_translation_locale = :de
       object.title = 'Deutsch'
