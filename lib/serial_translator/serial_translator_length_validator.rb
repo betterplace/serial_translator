@@ -4,8 +4,9 @@ module SerialTranslator
       translations = record.__send__("#{attribute}_translations")&.values || []
       translations = [nil] if translations.empty?
       translations.each do |value|
-        next if options[:allow_blank] && value.to_s == '' ||
-                options[:allow_nil]   && value.nil?
+        next if (options[:allow_blank] && value.to_s == '') ||
+                (options[:allow_nil]   && value.nil?)
+
         validate_translation(record, attribute, value)
       end
     end
