@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Translate attribute values without additional models}
   spec.summary       = %q{Translate ActiveRecord attribute values without additional models but with ease}
   spec.homepage      = "https://github.com/betterplace/serial_translator"
-  spec.license       = "WTFPL"
+  spec.license       = "Apache-2.0"
   spec.metadata = {
     "source_code_uri" => "https://github.com/betterplace/serial_translator",
     "funding_uri"     => "https://www.betterplace.org/de/projects/7046"

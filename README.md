@@ -64,6 +64,9 @@ end
 
 ## Contributing
 
+`SerialTranslator` is released under the [Apache License 2.0](LICENSE.txt) and
+Copyright 2013...2021 [gut.org gAG](https://gut.org).
+
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
