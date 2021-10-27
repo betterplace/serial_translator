@@ -48,10 +48,10 @@ module SerialTranslator
           __send__(:"#{attr_name}_translations_will_change!")
           translations = translations_for(attr_name)
 
-          value&.scrub!('')
+          scrubbed_value = value&.scrub('')
 
-          if value.present?
-            translations[current_translation_locale] = value
+          if scrubbed_value.present?
+            translations[current_translation_locale] = scrubbed_value
           else
             translations.delete(current_translation_locale)
           end
