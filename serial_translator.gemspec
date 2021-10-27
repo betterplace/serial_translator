@@ -8,9 +8,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["betterplace development team"]
   spec.email         = ["developers@betterplace.org"]
   spec.description   = %q{Translate attribute values without additional models}
-  spec.summary       = %q{Translate attribute values without additional models}
-  spec.homepage      = "http://www.betterplace.org"
+  spec.summary       = %q{Translate ActiveRecord attribute values without additional models but with ease}
+  spec.homepage      = "https://github.com/betterplace/serial_translator"
   spec.license       = "WTFPL"
+  spec.metadata = {
+    "source_code_uri" => "https://github.com/betterplace/serial_translator",
+    "funding_uri"     => "https://www.betterplace.org/de/projects/7046"
+  }
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
