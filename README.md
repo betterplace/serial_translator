@@ -9,7 +9,7 @@ Translate ActiveRecord object attributes without the use of additional models.
 
 Add it to your Gemfile:
 
-    gem 'serial_translator'
+    gem 'serial_translator', '~> 2.0'
 
 ## Usage
 
@@ -67,7 +67,8 @@ end
 `SerialTranslator` is released under the [Apache License 2.0](LICENSE.txt) and
 Copyright 2013...2021 [gut.org gAG](https://gut.org).
 
-1. Fork it
+0. Consider creating an [issue](https://github.com/betterplace/serial_translator/issues) and start a discussion
+1. Fork the repository
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
