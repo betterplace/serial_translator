@@ -53,6 +53,8 @@ blog_post.title_translations # => { de: 'Hey', en: 'Hello world' }
 
 So if you add a `title` field to a BlogPost form it will work on the title in the user’s locale by default. You can override this by setting the record’s `#current_translation_locale`.
 
+### ActiveRecord Validations
+
 Add length or presence validations if you want. They will use the same localization keys for error messages as the standard length and presence validations.
 
 ```ruby
